@@ -1,15 +1,16 @@
 package models;
 
-import java.util.Date;
-
 public class Consulta {
     private int id;
-    private Date dataHora;
+    private String dataHora;
     private Veterinario veterinario;  
     private Pet pet; 
     private String notas;
 
-    public Consulta(Date dataHora, Veterinario veterinario, Pet pet, String notas) {
+    public Consulta() {
+    }
+
+    public Consulta(String dataHora, Veterinario veterinario, Pet pet, String notas) {
         this.dataHora = dataHora;
         this.veterinario = veterinario;
         this.pet = pet;
@@ -25,10 +26,10 @@ public class Consulta {
     }
 
     // Getter/Setter - Data/Hora
-    public Date getDataHora() {
+    public String getDataHora() {
         return dataHora;
     }
-    public void setDataHora(Date dataHora) {
+    public void setDataHora(String dataHora) {
         this.dataHora = dataHora;
     }
 
