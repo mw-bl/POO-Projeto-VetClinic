@@ -8,6 +8,9 @@ public class Pet {
     private int idade;
     private Cliente tutor;
 
+    public Pet() {
+    }
+
     public Pet(String nome, String especie, String raca, int idade, Cliente tutor) {
         this.nome = nome;
         this.especie = especie;
