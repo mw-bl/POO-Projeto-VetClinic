@@ -1,3 +1,5 @@
+package models;
+
 public class Pet {
     private int id;
     private String nome;
