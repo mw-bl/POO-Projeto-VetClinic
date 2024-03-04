@@ -7,7 +7,6 @@ public class Veterinario {
     private String telefone;
 
     public Veterinario (int id, String nome, String especialidade, String telefone) {
-        this.id = id;
         this.nome = nome;
         this.especialidade = especialidade;
         this.telefone = telefone;
