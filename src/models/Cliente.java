@@ -5,6 +5,9 @@ public class Cliente {
     private String nome;
     private String telefone;
 
+    public Cliente() {
+    }
+
     public Cliente (int id, String nome, String telefone) {
         this.nome = nome;
         this.telefone = telefone;
