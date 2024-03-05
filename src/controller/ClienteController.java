@@ -56,4 +56,24 @@ public class ClienteController {
             System.out.println("Cliente excluído com sucesso.");
         }
     }
+
+    // Método para obter um cliente pelo ID
+    public static Cliente getClienteById(Connection conn, int clienteId) throws SQLException {
+        String sql = "SELECT * FROM Cliente WHERE id = ?";
+        Cliente cliente = null;
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, clienteId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new Cliente();
+                    cliente.setId(rs.getInt("id"));
+                    cliente.setNome(rs.getString("nome"));
+                    cliente.setTelefone(rs.getString("contato"));
+                }
+            }
+        }
+        return cliente;
+    }
 }
