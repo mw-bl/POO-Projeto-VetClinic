@@ -12,7 +12,7 @@ import models.Pet;
 
 public class PetController {
     // CRUD
-    public static void create(Connection conn, Pet pet) throws SQLException {
+    public static void insertData(Connection conn, Pet pet) throws SQLException {
         String sql = "INSERT INTO Pet (nome, especie, raca, idade, tutor_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, pet.getNome());
@@ -24,7 +24,7 @@ public class PetController {
             System.out.println("Pet cadastrado com sucesso.");
         }
     }
-    public static ArrayList<Pet> readAll(Connection conn) throws SQLException {
+    public static ArrayList<Pet> selectData(Connection conn) throws SQLException {
         ArrayList<Pet> pets = new ArrayList<>();
         String sql = "SELECT * FROM Pet";
         try (Statement stmt = conn.createStatement();
@@ -47,7 +47,7 @@ public class PetController {
         return pets;
     }
         
-    public static void update(Connection conn, Pet pet) throws SQLException {
+    public static void updateData(Connection conn, Pet pet) throws SQLException {
         String sql = "UPDATE Pet SET nome = ?, especie = ?, raca = ?, idade = ?, tutor_id = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, pet.getNome());
@@ -61,13 +61,59 @@ public class PetController {
         }
     }
         
-    public static void delete(Connection conn, int petId) throws SQLException {
+    public static void deleteData(Connection conn, int petId) throws SQLException {
         String sql = "DELETE FROM Pet WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, petId);
             pstmt.executeUpdate();
             System.out.println("Pet excluído com sucesso.");
         }
+    }
+
+    // Método para selecionar os pets pelo tutor
+    public static ArrayList<Pet> selectPetsByTutor(Connection conn, Cliente tutor) throws SQLException {
+        String sql = "SELECT * FROM Pet WHERE tutor_id = ?";
+        ArrayList<Pet> pets = new ArrayList<>();
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, tutor.getId());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Pet pet = new Pet();
+                    pet.setId(rs.getInt("id"));
+                    pet.setNome(rs.getString("nome"));
+                    pet.setEspecie(rs.getString("especie"));
+                    pet.setRaca(rs.getString("raca"));
+                    pet.setIdade(rs.getInt("idade"));
+                    pet.setTutor(tutor);  // Associa o tutor ao pet
+                    pets.add(pet);
+                }
+            }
+        }
+        return pets;
+    }
+
+    // Método para selecionar um pet pelo ID
+    public static Pet getPetById(Connection conn, int petId) throws SQLException {
+        String sql = "SELECT * FROM Pet WHERE id = ?";
+        Pet pet = null;
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, petId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    pet = new Pet();
+                    pet.setId(rs.getInt("id"));
+                    pet.setNome(rs.getString("nome"));
+                    pet.setEspecie(rs.getString("especie"));
+                    pet.setRaca(rs.getString("raca"));
+                    pet.setIdade(rs.getInt("idade"));
+                }
+            }
+        }
+        return pet;
     }
 }
         
