@@ -59,4 +59,25 @@ public class VeterinarioController {
             System.out.println("Veterinário excluído com sucesso.");
         }
     }
+
+    // Método para obter um veterinário pelo ID
+    public static Veterinario getVeterinarioById(Connection conn, int veterinarioId) throws SQLException {
+        String sql = "SELECT * FROM Veterinario WHERE id = ?";
+        Veterinario veterinario = null;
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, veterinarioId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    veterinario = new Veterinario();
+                    veterinario.setId(rs.getInt("id"));
+                    veterinario.setNome(rs.getString("nome"));
+                    veterinario.setEspecialidade(rs.getString("especialidade"));
+                    veterinario.setTelefone(rs.getString("contato"));
+                }
+            }
+        }
+        return veterinario;
+    }
 }
