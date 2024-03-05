@@ -13,6 +13,8 @@ public class Conexao {
         String mydatabase = "VetClinic";
 
         String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+        
+        // AJuste as configurações abaixo de acordo com o sua conta do MySQL Workbench
         String username = "root";
         String password  = "mw123";
 
