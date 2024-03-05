@@ -110,7 +110,6 @@ public class AgendaMedica {
                 System.out.println("Veterinário: " + consulta.getVeterinario().getNome());
                 System.out.println("Pet: " + consulta.getPet().getNome());
                 System.out.println("Notas: " + consulta.getNotas());
-                // Adicione outras informações conforme necessário
                 System.out.println("-------------------------");
             }
         } else {
