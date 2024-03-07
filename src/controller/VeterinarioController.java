@@ -40,15 +40,14 @@ public class VeterinarioController {
         return listVeterinarios;
     }
 
-    public static void updateData(Connection conn, Veterinario veterinario) throws SQLException {
+    public static void updateData(Connection conn, int veterinarioId, Veterinario novoVeterinario) throws SQLException {
         String sql = "UPDATE Veterinario SET nome = ?, especialidade = ?, telefone = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, veterinario.getNome());
-            pstmt.setString(2, veterinario.getEspecialidade());
-            pstmt.setString(3, veterinario.getTelefone());
-            pstmt.setInt(4, veterinario.getId());
+            pstmt.setString(1, novoVeterinario.getNome());
+            pstmt.setString(2, novoVeterinario.getEspecialidade());
+            pstmt.setString(3, novoVeterinario.getTelefone());
+            pstmt.setInt(4, novoVeterinario.getId());
             pstmt.executeUpdate();
-            System.out.println("Dados do veterinário atualizados com sucesso.");
         }
     }
 
@@ -75,7 +74,7 @@ public class VeterinarioController {
                     veterinario.setId(rs.getInt("id"));
                     veterinario.setNome(rs.getString("nome"));
                     veterinario.setEspecialidade(rs.getString("especialidade"));
-                    veterinario.setTelefone(rs.getString("contato"));
+                    veterinario.setTelefone(rs.getString("telefone"));
                 }
             }
         }
