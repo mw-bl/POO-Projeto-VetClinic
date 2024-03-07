@@ -16,7 +16,7 @@ public class Conexao {
         
         // AJuste as configurações abaixo de acordo com o sua conta do MySQL Workbench
         String username = "root";
-        String password  = "mw123";
+        String password  = "aluno";
 
         try {
             connection = DriverManager.getConnection(url, username, password);
