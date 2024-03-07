@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 
-import models.Cliente;
+import models.Tutor;
 import models.Pet;
 
 public class PetController {
@@ -38,7 +38,7 @@ public class PetController {
                 pet.setRaca(rs.getString("raca"));
                 pet.setIdade(rs.getInt("idade"));
                         
-                Cliente tutor = new Cliente();
+                Tutor tutor = new Tutor();
                 tutor.setId(rs.getInt("tutor_id"));
                 pet.setTutor(tutor);
         
@@ -48,19 +48,19 @@ public class PetController {
         return pets;
     }
         
-    public static void updateData(Connection conn, Pet pet) throws SQLException {
-        String sql = "UPDATE Pet SET nome = ?, especie = ?, raca = ?, idade = ?, tutor_id = ? WHERE id = ?";
+    public static void updateData(Connection conn, int petId, Pet novoPet) throws SQLException {
+        String sql = "UPDATE Pet SET nome = ?, especie = ?, raca = ?, idade = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, pet.getNome());
-            pstmt.setString(2, pet.getEspecie());
-            pstmt.setString(3, pet.getRaca());
-            pstmt.setInt(4, pet.getIdade());
-            pstmt.setInt(5, pet.getTutor().getId());
-            pstmt.setInt(6, pet.getId());
+            pstmt.setString(1, novoPet.getNome());
+            pstmt.setString(2, novoPet.getEspecie());
+            pstmt.setString(3, novoPet.getRaca());
+            pstmt.setInt(4, novoPet.getIdade());
+            pstmt.setInt(5, novoPet.getId());
             pstmt.executeUpdate();
-            System.out.println("Dados do pet atualizados com sucesso.");
+            System.out.println("Pet atualizado com sucesso.");
         }
     }
+    
         
     public static void deleteData(Connection conn, int petId) throws SQLException {
         String sql = "DELETE FROM Pet WHERE id = ?";
@@ -72,7 +72,7 @@ public class PetController {
     }
 
     // Método para selecionar os pets pelo tutor
-    public static ArrayList<Pet> selectPetsByTutor(Connection conn, Cliente tutor) throws SQLException {
+    public static ArrayList<Pet> selectPetsByTutor(Connection conn, Tutor tutor) throws SQLException {
         String sql = "SELECT * FROM Pet WHERE tutor_id = ?";
         ArrayList<Pet> pets = new ArrayList<>();
 
