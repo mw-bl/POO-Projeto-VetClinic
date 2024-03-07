@@ -15,11 +15,11 @@ import models.Veterinario;
 public class ConsultaController {
     // CRUD
     public static void insertData(Connection conn, Consulta consulta) throws SQLException {
-        String sql = "INSERT INTO Consulta (dataHora, veterinario_id, pet_id, notas) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Consulta (dataHora, veterinario_id, pet_id, notas) VALUES (STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'), ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, consulta.getDataHora());
-            pstmt.setInt(2, consulta.getVeterinario().getId());
-            pstmt.setInt(3, consulta.getPet().getId());
+            pstmt.setInt(2, consulta.getVeterinarioId());
+            pstmt.setInt(3, consulta.getPetId());
             pstmt.setString(4, consulta.getNotas());
             pstmt.executeUpdate();
             System.out.println("Consulta agendada com sucesso.");
@@ -47,8 +47,8 @@ public class ConsultaController {
         String sql = "UPDATE Consulta SET dataHora = ?, veterinario_id = ?, pet_id = ?, notas = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, consulta.getDataHora());
-            pstmt.setInt(2, consulta.getVeterinario().getId());
-            pstmt.setInt(3, consulta.getPet().getId());
+            pstmt.setInt(2, consulta.getVeterinarioId());
+            pstmt.setInt(3, consulta.getPetId());
             pstmt.setString(4, consulta.getNotas());
             pstmt.setInt(5, consulta.getId());
             pstmt.executeUpdate();
@@ -65,21 +65,21 @@ public class ConsultaController {
         }
     }
 
-    // Método para obter consultas por cliente
-    public static ArrayList<Consulta> readConsultasByCliente(Connection conn, int clienteId) throws SQLException {
+    // Método para obter consultas por tutor
+    public static ArrayList<Consulta> readConsultasByTutor(Connection conn, int tutorId) throws SQLException {
         String sql = "SELECT * FROM Consulta WHERE pet_id IN (SELECT id FROM Pet WHERE tutor_id = ?)";
         ArrayList<Consulta> consultas = new ArrayList<>();
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, clienteId);
+            pstmt.setInt(1, tutorId);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Consulta consulta = new Consulta();
                     consulta.setId(rs.getInt("id"));
                     consulta.setDataHora(rs.getString("dataHora"));
-                    consulta.setVeterinario(getVeterinarioById(conn, rs.getInt("veterinario_id")));
-                    consulta.setPet(getPetById(conn, rs.getInt("pet_id")));
+                    consulta.setVeterinarioId(rs.getInt("veterinario_id")); // Ajuste aqui
+                    consulta.setPetId(rs.getInt("pet_id")); // Ajuste aqui
                     consulta.setNotas(rs.getString("notas"));
                     // Adicione outras propriedades conforme necessário
                     consultas.add(consulta);
@@ -87,48 +87,5 @@ public class ConsultaController {
             }
         }
         return consultas;
-    }
-
-    // Método auxiliar para obter um veterinário por ID
-    private static Veterinario getVeterinarioById(Connection conn, int veterinarioId) throws SQLException {
-        String sql = "SELECT * FROM Veterinario WHERE id = ?";
-        Veterinario veterinario = null;
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, veterinarioId);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    veterinario = new Veterinario();
-                    veterinario.setId(rs.getInt("id"));
-                    veterinario.setNome(rs.getString("nome"));
-                    veterinario.setEspecialidade(rs.getString("especialidade"));
-                    veterinario.setTelefone(rs.getString("contato"));
-                }
-            }
-        }
-        return veterinario;
-    }
-
-    // Método auxiliar para obter um pet por ID
-    private static Pet getPetById(Connection conn, int petId) throws SQLException {
-        String sql = "SELECT * FROM Pet WHERE id = ?";
-        Pet pet = null;
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, petId);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    pet = new Pet();
-                    pet.setId(rs.getInt("id"));
-                    pet.setNome(rs.getString("nome"));
-                    pet.setEspecie(rs.getString("especie"));
-                    pet.setRaca(rs.getString("raca"));
-                    pet.setIdade(rs.getInt("idade"));
-                }
-            }
-        }
-        return pet;
     }
 }
