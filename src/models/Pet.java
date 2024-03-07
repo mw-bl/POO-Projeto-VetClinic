@@ -6,12 +6,12 @@ public class Pet {
     private String especie;
     private String raca;
     private int idade;
-    private Cliente tutor;
+    private Tutor tutor;
 
     public Pet() {
     }
 
-    public Pet(String nome, String especie, String raca, int idade, Cliente tutor) {
+    public Pet(String nome, String especie, String raca, int idade, Tutor tutor) {
         this.nome = nome;
         this.especie = especie;
         this.raca = raca;
@@ -60,10 +60,10 @@ public class Pet {
     }
 
     // Getter/Setter - Cliente tutor
-    public Cliente getTutor() {
+    public Tutor getTutor() {
         return tutor;
     }
-    public void setTutor(Cliente tutor) {
+    public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
 }
