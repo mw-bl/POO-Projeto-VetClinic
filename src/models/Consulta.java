@@ -3,17 +3,17 @@ package models;
 public class Consulta {
     private int id;
     private String dataHora;
-    private Veterinario veterinario;  
-    private Pet pet; 
+    private int veterinarioId;  
+    private int petId; 
     private String notas;
 
     public Consulta() {
     }
 
-    public Consulta(String dataHora, Veterinario veterinario, Pet pet, String notas) {
+    public Consulta(String dataHora, int veterinarioId, int petId, String notas) {
         this.dataHora = dataHora;
-        this.veterinario = veterinario;
-        this.pet = pet;
+        this.veterinarioId = veterinarioId;
+        this.petId = petId;
         this.notas = notas;
     }
 
@@ -34,19 +34,19 @@ public class Consulta {
     }
 
     // Getter/Setter - Veterinario
-    public Veterinario getVeterinario() {
-        return veterinario;
+    public int getVeterinarioId() {
+        return veterinarioId;
     }
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
+    public void setVeterinarioId(int veterinarioId) {
+        this.veterinarioId = veterinarioId;
     }
 
     // Getter/Setter - Pet
-    public Pet getPet() {
-        return pet;
+    public int getPetId() {
+        return petId;
     }
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPetId(int petId) {
+        this.petId = petId;
     }
 
     // Getter/Setter - Notas
