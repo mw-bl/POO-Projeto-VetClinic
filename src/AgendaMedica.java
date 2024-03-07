@@ -4,12 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import controller.ClienteController;
+import controller.TutorController;
 import controller.ConsultaController;
 import controller.PetController;
 import controller.VeterinarioController;
 
-import models.Cliente;
+import models.Tutor;
 import models.Consulta;
 import models.Pet;
 import models.Veterinario;
@@ -29,23 +29,23 @@ public class AgendaMedica {
         System.out.print("Selecione o ID do Veterinário: ");
         int veterinarioId = scanner.nextInt();
 
-        // Exibir lista de clientes (tutores)
-        System.out.println("\nLista de Clientes:");
-        ArrayList<Cliente> clientes = ClienteController.selectData(conn);
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente.getId() + ". " + cliente.getNome());
+        // Exibir lista de tutores
+        System.out.println("\nLista de Tutores:");
+        ArrayList<Tutor> tutores = TutorController.selectData(conn);
+        for (Tutor tutor : tutores) {
+            System.out.println(tutor.getId() + ". " + tutor.getNome());
         }
 
-        // Selecionar cliente (tutor)
-        System.out.print("Selecione o ID do Cliente (Tutor): ");
-        int clienteId = scanner.nextInt();
+        // Selecionar tutor
+        System.out.print("Selecione o ID do Tutor: ");
+        int tutorId = scanner.nextInt();
 
-        // Exibir lista de pets do cliente selecionado
-        Cliente cliente = ClienteController.getClienteById(conn, clienteId);
+        // Exibir lista de pets do tutor selecionado
+        Tutor tutor = TutorController.getTutorById(conn, tutorId);
 
-        System.out.println("\nLista de Pets do Cliente:");
-        ArrayList<Pet> petsDoCliente = PetController.selectPetsByTutor(conn, cliente);
-        for (Pet pet : petsDoCliente) {
+        System.out.println("\nLista de Pets do Tutor:");
+        ArrayList<Pet> petsDoTutor = PetController.selectPetsByTutor(conn, tutor);
+        for (Pet pet : petsDoTutor) {
             System.out.println(pet.getId() + ". " + pet.getNome() + " - " + pet.getEspecie());
         }
 
@@ -63,57 +63,14 @@ public class AgendaMedica {
 
         // Criar instância de Consulta
         Consulta consulta = new Consulta();
-        consulta.setVeterinario(VeterinarioController.getVeterinarioById(conn, veterinarioId));
-        consulta.setPet(PetController.getPetById(conn, petId));
+        consulta.setVeterinarioId(VeterinarioController.getVeterinarioById(conn, veterinarioId).getId());
+        consulta.setPetId(PetController.getPetById(conn, petId).getId());
         consulta.setDataHora(dataHora);
         consulta.setNotas(notas);
+
 
         // Agendar consulta
         ConsultaController.insertData(conn, consulta);
     }
 
-    public static void listarConsultas(Connection conn) throws SQLException {
-        ArrayList<Consulta> consultas = ConsultaController.selectData(conn);
-
-        System.out.println("\nLista de Consultas:");
-        for (Consulta consulta : consultas) {
-            System.out.println("ID: " + consulta.getId());
-            System.out.println("Data e Hora: " + consulta.getDataHora());
-            System.out.println("Veterinário: " + consulta.getVeterinario().getNome());
-            System.out.println("Pet: " + consulta.getPet().getNome());
-            System.out.println("Notas/Medicamentos: " + consulta.getNotas());
-            System.out.println("------------------------------");
-        }
-    }
-
-    public static void consultarConsultasPorCliente(Connection conn) throws SQLException {
-        Scanner scanner = new Scanner(System.in);
-
-        // Exibir lista de clientes
-        System.out.println("\nLista de Clientes:");
-        ArrayList<Cliente> clientes = ClienteController.selectData(conn);
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente.getId() + ". " + cliente.getNome());
-        }
-
-        // Selecionar cliente
-        System.out.print("Selecione o ID do Cliente para consultar consultas: ");
-        int clienteId = scanner.nextInt();
-
-        // Exibir consultas do cliente selecionado
-        ArrayList<Consulta> consultasDoCliente = ConsultaController.readConsultasByCliente(conn, clienteId);
-        if (!consultasDoCliente.isEmpty()) {
-            System.out.println("\nLista de Consultas do Cliente:");
-            for (Consulta consulta : consultasDoCliente) {
-                System.out.println("Consulta ID: " + consulta.getId());
-                System.out.println("Data/Hora: " + consulta.getDataHora());
-                System.out.println("Veterinário: " + consulta.getVeterinario().getNome());
-                System.out.println("Pet: " + consulta.getPet().getNome());
-                System.out.println("Notas: " + consulta.getNotas());
-                System.out.println("-------------------------");
-            }
-        } else {
-            System.out.println("Nenhuma consulta encontrada para este cliente.");
-        }
-    }
 }
