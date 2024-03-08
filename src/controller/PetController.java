@@ -70,51 +70,5 @@ public class PetController {
             System.out.println("Pet excluído com sucesso.");
         }
     }
-
-    // Método para selecionar os pets pelo tutor
-    public static ArrayList<Pet> selectPetsByTutor(Connection conn, Tutor tutor) throws SQLException {
-        String sql = "SELECT * FROM Pet WHERE tutor_id = ?";
-        ArrayList<Pet> pets = new ArrayList<>();
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, tutor.getId());
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    Pet pet = new Pet();
-                    pet.setId(rs.getInt("id"));
-                    pet.setNome(rs.getString("nome"));
-                    pet.setEspecie(rs.getString("especie"));
-                    pet.setRaca(rs.getString("raca"));
-                    pet.setIdade(rs.getInt("idade"));
-                    pet.setTutor(tutor);  // Associa o tutor ao pet
-                    pets.add(pet);
-                }
-            }
-        }
-        return pets;
-    }
-
-    // Método para selecionar um pet pelo ID
-    public static Pet getPetById(Connection conn, int petId) throws SQLException {
-        String sql = "SELECT * FROM Pet WHERE id = ?";
-        Pet pet = null;
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, petId);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    pet = new Pet();
-                    pet.setId(rs.getInt("id"));
-                    pet.setNome(rs.getString("nome"));
-                    pet.setEspecie(rs.getString("especie"));
-                    pet.setRaca(rs.getString("raca"));
-                    pet.setIdade(rs.getInt("idade"));
-                }
-            }
-        }
-        return pet;
-    }
 }
         
