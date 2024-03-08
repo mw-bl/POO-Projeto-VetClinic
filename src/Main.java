@@ -28,15 +28,15 @@ public class Main {
                 System.out.println("3. Atualizar Tutor");
                 System.out.println("4. Excluir Tutor");
                 System.out.println("------------------------------");
-                System.out.println("5. Adicionar Veterinário");
-                System.out.println("6. Ler Todos os Veterinários");
-                System.out.println("7. Atualizar Veterinário");
-                System.out.println("8. Excluir Veterinário");
+                System.out.println("5. Adicionar Pet");
+                System.out.println("6. Ler Todos os Pets");
+                System.out.println("7. Atualizar Pet");
+                System.out.println("8. Excluir Pet");
                 System.out.println("------------------------------");
-                System.out.println("9. Adicionar Pet");
-                System.out.println("10. Ler Todos os Pets");
-                System.out.println("11. Atualizar Pet");
-                System.out.println("12. Excluir Pet");
+                System.out.println("9. Adicionar Veterinário");
+                System.out.println("10. Ler Todos os Veterinários");
+                System.out.println("11. Atualizar Veterinário");
+                System.out.println("12. Excluir Veterinário");
                 System.out.println("------------------------------");
                 System.out.println("13. Adicionar Consulta");
                 System.out.println("14. Ler Todas as Consultas");
@@ -52,8 +52,19 @@ public class Main {
                 switch (opcao) {
                     case 1:
                         // Adicionar um novo tutor
-                        Tutor novoTutor = new Tutor("João", "8899447-1505", "joao@email.com", "1990-01-01");
+                        // System.out.println("Digite o nome do tutor:");
+                        // String nomeTutor = scanner.nextLine();
+                        // System.out.println("Digite o telefone do tutor:");
+                        // String telefoneTutor = scanner.nextLine();
+                        // System.out.println("Digite o email do tutor:");
+                        // String emailTutor = scanner.nextLine();
+                        // System.out.println("Digite a data de nascimento do tutor (no formato YYYY-MM-DD):");
+                        // String dataNascimentoTutor = scanner.nextLine();
+
+                        Tutor novoTutor = new Tutor("Jhon Doe", "8899325-6784", "jhondoe@email.com", "2003-06-29");
                         TutorController.insertData(conn, novoTutor);
+
+                        System.out.println("Tutor adicionado com sucesso.");
                         break;
 
                     case 2:
@@ -110,8 +121,8 @@ public class Main {
 
                     case 9:
                         // Adicionar um novo veterinário
-                        Veterinario novoVeterinario = new Veterinario("Dr. Silva", "Cardiologia", "8899317-1426");
-                        VeterinarioController.insertData(conn, novoVeterinario);
+                        Veterinario veterinario = new Veterinario(opcao, "Dr. Silva", "Cardiologia", "8899317-1426");
+                        VeterinarioController.insertData(conn, veterinario);
                         break;
 
                     case 10:
@@ -120,7 +131,6 @@ public class Main {
                         for (Veterinario veterinario : veterinarios) {
                             System.out.println(veterinario);
                         }
-                        break;
 
                     case 11:
                         // Atualizar informações de um veterinário
