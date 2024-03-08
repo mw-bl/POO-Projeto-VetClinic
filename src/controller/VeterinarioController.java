@@ -40,13 +40,13 @@ public class VeterinarioController {
         return listVeterinarios;
     }
 
-    public static void updateData(Connection conn, int veterinarioId, Veterinario novoVeterinario) throws SQLException {
+    public static void updateData(Connection conn, int veterinarioId, Veterinario veterinario) throws SQLException {
         String sql = "UPDATE Veterinario SET nome = ?, especialidade = ?, telefone = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, novoVeterinario.getNome());
-            pstmt.setString(2, novoVeterinario.getEspecialidade());
-            pstmt.setString(3, novoVeterinario.getTelefone());
-            pstmt.setInt(4, novoVeterinario.getId());
+            pstmt.setString(1, veterinario.getNome());
+            pstmt.setString(2, veterinario.getEspecialidade());
+            pstmt.setString(3, veterinario.getTelefone());
+            pstmt.setInt(4, veterinario.getId());
             pstmt.executeUpdate();
         }
     }
@@ -60,24 +60,24 @@ public class VeterinarioController {
         }
     }
 
-    // Método para obter um veterinário pelo ID
-    public static Veterinario getVeterinarioById(Connection conn, int veterinarioId) throws SQLException {
-        String sql = "SELECT * FROM Veterinario WHERE id = ?";
-        Veterinario veterinario = null;
+    // // Método para obter um veterinário pelo ID
+    // public static Veterinario getVeterinarioById(Connection conn, int veterinarioId) throws SQLException {
+    //     String sql = "SELECT * FROM Veterinario WHERE id = ?";
+    //     Veterinario veterinario = null;
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, veterinarioId);
+    //     try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    //         pstmt.setInt(1, veterinarioId);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    veterinario = new Veterinario();
-                    veterinario.setId(rs.getInt("id"));
-                    veterinario.setNome(rs.getString("nome"));
-                    veterinario.setEspecialidade(rs.getString("especialidade"));
-                    veterinario.setTelefone(rs.getString("telefone"));
-                }
-            }
-        }
-        return veterinario;
-    }
+    //         try (ResultSet rs = pstmt.executeQuery()) {
+    //             if (rs.next()) {
+    //                 veterinario = new Veterinario();
+    //                 veterinario.setId(rs.getInt("id"));
+    //                 veterinario.setNome(rs.getString("nome"));
+    //                 veterinario.setEspecialidade(rs.getString("especialidade"));
+    //                 veterinario.setTelefone(rs.getString("telefone"));
+    //             }
+    //         }
+    //     }
+    //     return veterinario;
+    // }
 }
