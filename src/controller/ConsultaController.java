@@ -62,28 +62,4 @@ public class ConsultaController {
             System.out.println("Consulta excluída com sucesso.");
         }
     }
-
-    // Método para obter consultas por tutor
-    public static ArrayList<Consulta> readConsultasByTutor(Connection conn, int tutorId) throws SQLException {
-        String sql = "SELECT * FROM Consulta WHERE pet_id IN (SELECT id FROM Pet WHERE tutor_id = ?)";
-        ArrayList<Consulta> consultas = new ArrayList<>();
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, tutorId);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    Consulta consulta = new Consulta();
-                    consulta.setId(rs.getInt("id"));
-                    consulta.setDataHora(rs.getString("dataHora"));
-                    consulta.setVeterinarioId(rs.getInt("veterinario_id")); // Ajuste aqui
-                    consulta.setPetId(rs.getInt("pet_id")); // Ajuste aqui
-                    consulta.setNotas(rs.getString("notas"));
-                    // Adicione outras propriedades conforme necessário
-                    consultas.add(consulta);
-                }
-            }
-        }
-        return consultas;
-    }
 }
