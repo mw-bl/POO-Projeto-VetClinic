@@ -64,25 +64,25 @@ public class TutorController {
         }
     }
 
-    // Método para obter um tutor pelo ID
-    public static Tutor getTutorById(Connection conn, int tutorId) throws SQLException {
-        String sql = "SELECT * FROM Tutor WHERE id = ?";
-        Tutor tutor = null;
+    // // Método para obter um tutor pelo ID
+    // public static Tutor getTutorById(Connection conn, int tutorId) throws SQLException {
+    //     String sql = "SELECT * FROM Tutor WHERE id = ?";
+    //     Tutor tutor = null;
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, tutorId);
+    //     try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    //         pstmt.setInt(1, tutorId);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    tutor = new Tutor();
-                    tutor.setId(rs.getInt("id"));
-                    tutor.setNome(rs.getString("nome"));
-                    tutor.setTelefone(rs.getString("telefone"));
-                    tutor.setEmail(rs.getString("email"));
-                    tutor.setDataNascimento(rs.getString("dataNascimento"));
-                }
-            }
-        }
-        return tutor;
-    }
+    //         try (ResultSet rs = pstmt.executeQuery()) {
+    //             if (rs.next()) {
+    //                 tutor = new Tutor();
+    //                 tutor.setId(rs.getInt("id"));
+    //                 tutor.setNome(rs.getString("nome"));
+    //                 tutor.setTelefone(rs.getString("telefone"));
+    //                 tutor.setEmail(rs.getString("email"));
+    //                 tutor.setDataNascimento(rs.getString("dataNascimento"));
+    //             }
+    //         }
+    //     }
+    //     return tutor;
+    // }
 }
