@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import controller.TutorController;
 import controller.ConsultaController;
@@ -14,120 +15,169 @@ import models.Consulta;
 import models.Pet;
 import models.Veterinario;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         try (Connection conn = Conexao.getConexaoMySQL()) {
  
-            // Cadastrar um tutor
-            Tutor tutor = new Tutor();
-            tutor.setNome("Marcos");
-            tutor.setTelefone("12345678");
-            tutor.setEmail("marcos.willian09@aluno.ifce.edu.br");
-            tutor.setDataNascimento("2003-06-29");
-            TutorController.insertData(conn, tutor);
+            Scanner scanner = new Scanner(System.in);
 
-            // Cadastrar um pet associado ao tutor
-            Pet pet = new Pet();
-            pet.setNome("Rex");
-            pet.setEspecie("Cachorro");
-            pet.setRaca("Labrador");
-            pet.setIdade(3);
+            while (true) {
+                System.out.println("\nMenu:");
+                System.out.println("1. Adicionar Tutor");
+                System.out.println("2. Ler Todos os Tutores");
+                System.out.println("3. Atualizar Tutor");
+                System.out.println("4. Excluir Tutor");
+                System.out.println("5. Adicionar Veterinário");
+                System.out.println("6. Ler Todos os Veterinários");
+                System.out.println("7. Atualizar Veterinário");
+                System.out.println("8. Excluir Veterinário");
+                System.out.println("9. Adicionar Pet");
+                System.out.println("10. Ler Todos os Pets");
+                System.out.println("11. Atualizar Pet");
+                System.out.println("12. Excluir Pet");
+                System.out.println("13. Adicionar Consulta");
+                System.out.println("14. Ler Todas as Consultas");
+                System.out.println("15. Atualizar Consulta");
+                System.out.println("16. Excluir Consulta");
+                System.out.println("17. Sair");
+                System.out.println("Digite a opção desejada:");
 
-            Tutor tutorExistente = new Tutor();
-            tutorExistente.setId(1);
-            pet.setTutor(tutorExistente);
-            PetController.insertData(conn, pet);
+                int opcao = scanner.nextInt();
+                scanner.nextLine(); // Consumir a quebra de linha após a leitura do número
 
-            // Cadastrar um veterinário
-            Veterinario veterinario = new Veterinario();
-            veterinario.setNome("Dr. Ana Souza");
-            veterinario.setEspecialidade("Clínico Geral");
-            veterinario.setTelefone("987654321");
-            VeterinarioController.insertData(conn, veterinario);
-            int petId = 1;  // Substitua pelo ID do pet desejado
-            int veterinarioId = 1;  // Substitua pelo ID do veterinário desejado
-            
-            // Agendar uma consulta
-            String dataHora = "2024-03-15 10:30:00";
-            Consulta consulta = new Consulta(dataHora, veterinarioId, petId, "Acompanhamento pós-cirúrgico");
-            ConsultaController.insertData(conn, consulta);
-            
-            // Atualizar um tutor
-            int tutorId = 1;  // Substitua pelo ID do tutor desejado
-            Tutor tutorParaAtualizar = TutorController.getTutorById(conn, tutorId);
+                switch (opcao) {
+                    case 1:
+                        // Adicionar um novo tutor
+                        Tutor novoTutor = new Tutor("João", "8899447-1505", "joao@email.com", "1990-01-01");
+                        TutorController.insertData(conn, novoTutor);
+                        break;
 
-            // Verificando se o tutor foi encontrado
-            if (tutorParaAtualizar != null) {
-                // Atualizando os dados do tutor
-                tutorParaAtualizar.setNome("Jessica");
-                tutorParaAtualizar.setTelefone("8899236-4893");
-                tutorParaAtualizar.setEmail("jessica.email@example.com");
-                tutorParaAtualizar.setDataNascimento("2000-01-01");
+                    case 2:
+                        // Ler todos os tutores
+                        ArrayList<Tutor> tutores = TutorController.selectData(conn);
+                        for (Tutor tutor : tutores) {
+                            System.out.println(tutor);
+                        }
+                        break;
 
-                // Chamando o método de atualização
-                TutorController.updateData(conn, tutorId, tutorParaAtualizar);
-                System.out.println("Tutor atualizado com sucesso.");
-            } else {
-                System.out.println("Tutor não encontrado.");
+                    case 3:
+                        // Atualizar informações de um tutor
+                        Tutor tutorParaAtualizar = tutores.get(0);
+                        tutorParaAtualizar.setNome("João da Silva");
+                        tutorParaAtualizar.setTelefone("987-654-321");
+                        TutorController.updateData(conn, tutorParaAtualizar.getId(), tutorParaAtualizar);
+                        break;
+
+                    case 4:
+                        // Excluir um tutor
+                        int tutorIdParaExcluir = tutores.get(0).getId();
+                        TutorController.deleteData(conn, tutorIdParaExcluir);
+                        break;
+
+                    case 5:
+                        // Adicionar um novo pet
+                        Tutor tutor = new Tutor();
+                        tutor.setId(1); // Substitua pelo ID do tutor existente
+                        Pet novoPet = new Pet("Bolinha", "Cachorro", "Vira-lata", 3, tutor);
+                        PetController.insertData(conn, novoPet);
+                        break;
+
+                    case 6:
+                        // Ler todos os pets
+                        ArrayList<Pet> pets = PetController.selectData(conn);
+                        for (Pet pet : pets) {
+                            System.out.println(pet);
+                        }
+                        break;
+
+                    case 7:
+                        // Atualizar informações de um pet
+                        Pet petParaAtualizar = pets.get(0);
+                        petParaAtualizar.setNome("Novo Nome");
+                        petParaAtualizar.setRaca("Nova Raça");
+                        PetController.updateData(conn, petParaAtualizar.getId(), petParaAtualizar);
+                        break;
+
+                    case 8:
+                        // Excluir um pet
+                        int petIdParaExcluir = pets.get(0).getId();
+                        PetController.deleteData(conn, petIdParaExcluir);
+                        break;
+
+                    case 9:
+                        // Adicionar um novo veterinário
+                        Veterinario novoVeterinario = new Veterinario("Dr. Silva", "Cardiologia", "8899317-1426");
+                        VeterinarioController.insertData(conn, novoVeterinario);
+                        break;
+
+                    case 10:
+                        // Ler todos os veterinários
+                        ArrayList<Veterinario> veterinarios = VeterinarioController.selectData(conn);
+                        for (Veterinario veterinario : veterinarios) {
+                            System.out.println(veterinario);
+                        }
+                        break;
+
+                    case 11:
+                        // Atualizar informações de um veterinário
+                        Veterinario veterinarioParaAtualizar = veterinarios.get(0);
+                        veterinarioParaAtualizar.setNome("Dr. Novo Nome");
+                        veterinarioParaAtualizar.setEspecialidade("Nova Especialidade");
+                        VeterinarioController.updateData(conn, veterinarioParaAtualizar.getId(), veterinarioParaAtualizar);
+                        break;
+
+                    case 12:
+                        // Excluir um veterinário
+                        int veterinarioIdParaExcluir = veterinarios.get(0).getId();
+                        VeterinarioController.deleteData(conn, veterinarioIdParaExcluir);
+                        break;
+
+                    case 13:
+                        // Adicionar uma nova consulta
+                        Consulta novaConsulta = new Consulta();
+                        novaConsulta.setDataHora("2024-03-08 10:00:00");
+                        novaConsulta.setVeterinarioId(1);
+                        novaConsulta.setPetId(1);
+                        novaConsulta.setNotas("Consulta de rotina");
+                        ConsultaController.insertData(conn, novaConsulta);
+                        break;
+
+                    case 14:
+                        // Ler todas as consultas
+                        ArrayList<Consulta> consultas = ConsultaController.selectData(conn);
+                        for (Consulta consulta : consultas) {
+                            System.out.println(consulta);
+                        }
+                        break;
+
+                    case 15:
+                        // Atualizar a consulta
+                        Consulta consultaParaAtualizar = consultas.get(0);
+                        consultaParaAtualizar.setNotas("Nova nota para a consulta");
+                        ConsultaController.updateData(conn, consultaParaAtualizar);
+                        break;
+
+                    case 16:
+                        // Excluir a consulta
+                        int consultaIdParaExcluir = consultas.get(0).getId();
+                        ConsultaController.deleteData(conn, consultaIdParaExcluir);
+                        break;
+
+                    case 17:
+                        // Sair do programa
+                        System.out.println("Programa encerrado.");
+                        conn.close();
+                        scanner.close();
+                        System.exit(0);
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
+                }
             }
-
-
-            int petId = 1;  // Substitua pelo ID do pet desejado
-            Pet petParaAtualizar = PetController.getPetById(conn, petId);
-
-            // Verificando se o pet foi encontrado
-            if (petParaAtualizar != null) {
-                // Atualizando os dados do pet
-                petParaAtualizar.setNome("Lola");
-                petParaAtualizar.setEspecie("Passaro");
-                petParaAtualizar.setRaca("Calopsita");
-                petParaAtualizar.setIdade(4);
-
-                // Chamando o método de atualização
-                PetController.updateData(conn, petId, petParaAtualizar);
-                System.out.println("Pet atualizado com sucesso.");
-            } else {
-                System.out.println("Pet não encontrado.");
-            }
-
-            int veterinarioId = 1;  // Substitua pelo ID do veterinário desejado
-            Veterinario veterinarioParaAtualizar = VeterinarioController.getVeterinarioById(conn, veterinarioId);
-        
-            // Verificando se o veterinário foi encontrado
-            if (veterinarioParaAtualizar != null) {
-                // Atualizando os dados do veterinário
-                veterinarioParaAtualizar.setNome("Dr. Mateus Silva");
-                veterinarioParaAtualizar.setEspecialidade("Clinico Geral");
-                veterinarioParaAtualizar.setTelefone("8899675-4892");
-        
-                // Chamando o método de atualização
-                VeterinarioController.updateData(conn, veterinarioId, veterinarioParaAtualizar);
-                System.out.println("Veterinário atualizado com sucesso.");
-            } else {
-                System.out.println("Veterinário não encontrado.");
-            }
-
-            int tutorId = 1;  // Substitua pelo ID do tutor desejado
-            ArrayList<Consulta> consultasDoTutor = ConsultaController.readConsultasByTutor(conn, tutorId);
-
-            // Verificando se há consultas para o tutor
-            if (!consultasDoTutor.isEmpty()) {
-                // Escolhendo uma consulta para atualizar (suponha que a primeira seja escolhida)
-                Consulta consultaParaAtualizar = consultasDoTutor.get(0);
-
-                // Atualizando os dados da consulta
-                consultaParaAtualizar.setDataHora("2024-03-15 12:00:00");
-                consultaParaAtualizar.setNotas("Retorno");
-
-                // Chamando o método de atualização
-                ConsultaController.updateData(conn, consultaParaAtualizar);
-                System.out.println("Consulta atualizada com sucesso.");
-            } else {
-                System.out.println("Nenhuma consulta encontrada para este tutor.");
-            }
-
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
