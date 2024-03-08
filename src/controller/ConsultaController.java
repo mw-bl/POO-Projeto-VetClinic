@@ -9,8 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import models.Consulta;
-import models.Pet;
-import models.Veterinario;
 
 public class ConsultaController {
     // CRUD
