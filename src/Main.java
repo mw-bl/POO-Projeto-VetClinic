@@ -27,18 +27,22 @@ public class Main {
                 System.out.println("2. Ler Todos os Tutores");
                 System.out.println("3. Atualizar Tutor");
                 System.out.println("4. Excluir Tutor");
+                System.out.println("------------------------------");
                 System.out.println("5. Adicionar Veterinário");
                 System.out.println("6. Ler Todos os Veterinários");
                 System.out.println("7. Atualizar Veterinário");
                 System.out.println("8. Excluir Veterinário");
+                System.out.println("------------------------------");
                 System.out.println("9. Adicionar Pet");
                 System.out.println("10. Ler Todos os Pets");
                 System.out.println("11. Atualizar Pet");
                 System.out.println("12. Excluir Pet");
+                System.out.println("------------------------------");
                 System.out.println("13. Adicionar Consulta");
                 System.out.println("14. Ler Todas as Consultas");
                 System.out.println("15. Atualizar Consulta");
                 System.out.println("16. Excluir Consulta");
+                System.out.println("------------------------------");
                 System.out.println("17. Sair");
                 System.out.println("Digite a opção desejada:");
 
