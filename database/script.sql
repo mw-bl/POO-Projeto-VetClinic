@@ -1,14 +1,6 @@
 CREATE DATABASE VetClinic;
 USE VetClinic;
 
--- Tabela Veterinários
-CREATE TABLE Veterinario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    especialidade VARCHAR(50),
-    telefone VARCHAR(15)
-);
-
 -- Tabela Tutores
 CREATE TABLE Tutor (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -27,6 +19,14 @@ CREATE TABLE Pet (
     idade INT,
     tutor_id INT,
     FOREIGN KEY (tutor_id) REFERENCES Tutor(id)
+);
+
+-- Tabela Veterinários
+CREATE TABLE Veterinario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    especialidade VARCHAR(50),
+    telefone VARCHAR(15)
 );
 
 -- Tabela Consultas
