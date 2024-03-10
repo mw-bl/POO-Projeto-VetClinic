@@ -9,7 +9,7 @@ public class Veterinario {
     public Veterinario() {
     }
 
-    public Veterinario (int id, String nome, String especialidade, String telefone) {
+    public Veterinario (String nome, String especialidade, String telefone) {
         this.nome = nome;
         this.especialidade = especialidade;
         this.telefone = telefone;
