@@ -22,7 +22,8 @@ public class PetController {
             pstmt.setInt(4, pet.getIdade());
             pstmt.setInt(5, pet.getTutor().getId());
             pstmt.executeUpdate();
-            System.out.println("Pet cadastrado com sucesso.");
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao inserir os dados do pet", e);
         }
     }
     public static ArrayList<Pet> selectData(Connection conn) throws SQLException {
@@ -44,6 +45,8 @@ public class PetController {
         
                 pets.add(pet);
             }
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao selecionar os dados do pet", e);
         }
         return pets;
     }
@@ -57,7 +60,8 @@ public class PetController {
             pstmt.setInt(4, novoPet.getIdade());
             pstmt.setInt(5, novoPet.getId());
             pstmt.executeUpdate();
-            System.out.println("Pet atualizado com sucesso.");
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao atualizar os dados do pet", e);
         }
     }
     
@@ -67,7 +71,8 @@ public class PetController {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, petId);
             pstmt.executeUpdate();
-            System.out.println("Pet excluído com sucesso.");
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao deletar os dados do pet", e);
         }
     }
 }
