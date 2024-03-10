@@ -20,7 +20,8 @@ public class TutorController {
             pstmt.setString(3, tutor.getEmail());
             pstmt.setString(4, tutor.getDataNascimento());
             pstmt.executeUpdate();
-            System.out.println("Tutor cadastrado com sucesso.");
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao inserir os dados do tutor", e);
         }
     }
 
@@ -38,6 +39,8 @@ public class TutorController {
                 tutor.setDataNascimento(rs.getString("dataNascimento"));
                 listTutors.add(tutor);
             }
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao selecionar os dados do pet", e);
         }
         return listTutors;
     }
@@ -49,9 +52,11 @@ public class TutorController {
             pstmt.setString(2, novoTutor.getTelefone());
             pstmt.setString(3, novoTutor.getEmail());
             pstmt.setString(4, novoTutor.getDataNascimento());
-            pstmt.setInt(5, tutorId);  // Corrigido para o índice 5
+            pstmt.setInt(5, tutorId);
             pstmt.executeUpdate();
-            System.out.println("Dados do tutor atualizados com sucesso.");
+
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao atualizar os dados do tutor", e);
         }
     }
     
@@ -60,7 +65,8 @@ public class TutorController {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, tutorId);
             pstmt.executeUpdate();
-            System.out.println("Tutor excluído com sucesso.");
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao deletar os dados do tutor", e);
         }
     }
 }
