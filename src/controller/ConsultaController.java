@@ -20,7 +20,8 @@ public class ConsultaController {
             pstmt.setInt(3, consulta.getPetId());
             pstmt.setString(4, consulta.getNotas());
             pstmt.executeUpdate();
-            System.out.println("Consulta agendada com sucesso.");
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao inserir os dados da Consulta", e);
         }
     }
 
@@ -33,10 +34,11 @@ public class ConsultaController {
                     Consulta consulta = new Consulta();
                     consulta.setId(rs.getInt("id"));
                     consulta.setDataHora(rs.getString("DataHora"));
-                    // Preencha as referências para Veterinário e Pet conforme necessário
                     consulta.setNotas(rs.getString("notas"));
                     listConsultas.add(consulta);
                 }
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao selecionar os dados da Consulta", e);
         }
         return listConsultas;
     }
@@ -50,7 +52,8 @@ public class ConsultaController {
             pstmt.setString(4, consulta.getNotas());
             pstmt.setInt(5, consulta.getId());
             pstmt.executeUpdate();
-            System.out.println("Consulta atualizada com sucesso.");
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao atualizar os dados da Consulta", e);
         }
     }
 
@@ -59,7 +62,8 @@ public class ConsultaController {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, consultaId);
             pstmt.executeUpdate();
-            System.out.println("Consulta excluída com sucesso.");
+        }  catch (SQLException e) {
+            throw new SQLException("Erro ao deletar os dados da Consulta", e);
         }
     }
 }
