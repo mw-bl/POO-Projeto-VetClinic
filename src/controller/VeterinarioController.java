@@ -19,7 +19,8 @@ public class VeterinarioController {
             pstmt.setString(2, veterinario.getEspecialidade());
             pstmt.setString(3, veterinario.getTelefone());
             pstmt.executeUpdate();
-            System.out.println("Veterinário cadastrado com sucesso.");
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao inserir os dados do veterinario", e);
         }
     }
 
@@ -36,6 +37,8 @@ public class VeterinarioController {
                 veterinario.setTelefone(rs.getString("telefone"));
                 listVeterinarios.add(veterinario);
             }
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao selecionar os dados do veterinario", e);
         }
         return listVeterinarios;
     }
@@ -48,6 +51,8 @@ public class VeterinarioController {
             pstmt.setString(3, veterinario.getTelefone());
             pstmt.setInt(4, veterinario.getId());
             pstmt.executeUpdate();
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao atualizar os dados do veterinario", e);
         }
     }
 
@@ -56,7 +61,8 @@ public class VeterinarioController {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, veterinarioId);
             pstmt.executeUpdate();
-            System.out.println("Veterinário excluído com sucesso.");
+        }   catch (SQLException e) {
+            throw new SQLException("Erro ao deletar os dados do veterinario", e);
         }
     }
 }
