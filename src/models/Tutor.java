@@ -10,7 +10,7 @@ public class Tutor {
     public Tutor() {
     }
 
-    public Tutor (int id, String nome, String telefone, String email, String dataNascimento) {
+    public Tutor(String nome, String telefone, String email, String dataNascimento) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
