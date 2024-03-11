@@ -163,13 +163,19 @@ public class Main {
 
                         System.out.println("Digite o novo nome do pet:");
                         String novoNomePet = scanner.nextLine();
+                        System.out.println("Digite a nova especie do pet:");
+                        String novaEspeciePet = scanner.nextLine();
                         System.out.println("Digite a nova raça do pet:");
                         String novaRacaPet = scanner.nextLine();
+                        System.out.println("Digite a nova idade do pet:");
+                        String novaIdadePet = scanner.nextLine();
 
                         Pet petAtualizado = new Pet();
                         petAtualizado.setId(petIdParaAtualizar);
                         petAtualizado.setNome(novoNomePet);
+                        petAtualizado.setNome(novaEspeciePet);
                         petAtualizado.setRaca(novaRacaPet);
+                        petAtualizado.setRaca(novaIdadePet);
 
                         PetController.updateData(conn, petIdParaAtualizar, petAtualizado);
                         System.out.println("Pet atualizado com sucesso.");
@@ -210,7 +216,7 @@ public class Main {
                             System.out.println("Especialidade: " + vet.getEspecialidade());
                             System.out.println("Telefone: " + vet.getTelefone());
                         }
-
+                        break;
                     case 11:
                         // Atualizar informações de um veterinário
                         System.out.println("Digite o ID do veterinário que deseja atualizar:");
@@ -248,19 +254,19 @@ public class Main {
                         // Adicionar uma nova consulta
                         System.out.println("Digite a data e hora da consulta (no formato 'yyyy-MM-dd HH:mm:ss'):");
                         String dataHoraConsulta = scanner.nextLine();
-                        System.out.println("Digite o ID do veterinário para a consulta:");
-                        int veterinarioIdConsulta = scanner.nextInt();
+                        System.out.println("Digite o nome do veterinário para a consulta:");
+                        String NomeVeterinario = scanner.nextLine();
                         scanner.nextLine();
-                        System.out.println("Digite o ID do pet para a consulta:");
-                        int petIdConsulta = scanner.nextInt();
+                        System.out.println("Digite o nome do pet para a consulta:");
+                        String NomePet = scanner.nextLine();
                         scanner.nextLine(); 
                         System.out.println("Digite notas para a consulta:");
                         String notasConsulta = scanner.nextLine();
 
                         Consulta novaConsulta = new Consulta();
                         novaConsulta.setDataHora(dataHoraConsulta);
-                        novaConsulta.setVeterinarioId(veterinarioIdConsulta);
-                        novaConsulta.setPetId(petIdConsulta);
+                        novaConsulta.setNomeVeterinario(NomeVeterinario);
+                        novaConsulta.setNomePet(NomePet);
                         novaConsulta.setNotas(notasConsulta);
 
                         ConsultaController.insertData(conn, novaConsulta);
@@ -275,8 +281,8 @@ public class Main {
                         for (Consulta consulta : consultasList) {
                             System.out.println("ID: " + consulta.getId());
                             System.out.println("Data e Hora: " + consulta.getDataHora());
-                            System.out.println("ID do Veterinário: " + consulta.getVeterinarioId());
-                            System.out.println("ID do Pet: " + consulta.getPetId());
+                            System.out.println("Nome do Veterinário: " + consulta.getNomeVeterinario());
+                            System.out.println("Nome do Pet: " + consulta.getNomePet());
                             System.out.println("Notas: " + consulta.getNotas());
                         }
                         break;
@@ -289,11 +295,11 @@ public class Main {
 
                         System.out.println("Digite a nova data e hora da consulta (no formato 'yyyy-MM-dd HH:mm:ss'):");
                         String novaDataHoraConsulta = scanner.nextLine();
-                        System.out.println("Digite o novo ID do veterinário para a consulta:");
-                        int novoVeterinarioIdConsulta = scanner.nextInt();
+                        System.out.println("Digite o novo nome do veterinário para a consulta:");
+                        String novoNomeVeterinarioConsulta = scanner.nextLine();
                         scanner.nextLine(); 
-                        System.out.println("Digite o novo ID do pet para a consulta:");
-                        int novoPetIdConsulta = scanner.nextInt();
+                        System.out.println("Digite o novo nome do pet para a consulta:");
+                        String novoNomePetConsulta = scanner.nextLine();
                         scanner.nextLine(); 
                         System.out.println("Digite as novas notas para a consulta:");
                         String novasNotasConsulta = scanner.nextLine();
@@ -301,8 +307,8 @@ public class Main {
                         Consulta consultaAtualizada = new Consulta();
                         consultaAtualizada.setId(consultaIdParaAtualizar);
                         consultaAtualizada.setDataHora(novaDataHoraConsulta);
-                        consultaAtualizada.setVeterinarioId(novoVeterinarioIdConsulta);
-                        consultaAtualizada.setPetId(novoPetIdConsulta);
+                        consultaAtualizada.setNomeVeterinario(novoNomeVeterinarioConsulta);
+                        consultaAtualizada.setNomePet(novoNomePetConsulta);
                         consultaAtualizada.setNotas(novasNotasConsulta);
 
                         ConsultaController.updateData(conn, consultaAtualizada);
