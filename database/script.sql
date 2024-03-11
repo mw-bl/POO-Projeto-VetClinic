@@ -33,9 +33,7 @@ CREATE TABLE Veterinario (
 CREATE TABLE Consulta (
     id INT PRIMARY KEY AUTO_INCREMENT,
     dataHora VARCHAR(20) NOT NULL,
-    veterinario_id INT,
-    pet_id INT,
-    notas TEXT,
-    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id),
-    FOREIGN KEY (pet_id) REFERENCES Pet(id)
+    nomeVeterinario VARCHAR(50),
+    nomePet VARCHAR(50),
+    notas TEXT
 );
