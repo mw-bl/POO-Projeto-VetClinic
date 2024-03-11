@@ -13,11 +13,11 @@ import models.Consulta;
 public class ConsultaController {
     // CRUD
     public static void insertData(Connection conn, Consulta consulta) throws SQLException {
-        String sql = "INSERT INTO Consulta (dataHora, veterinario_id, pet_id, notas) VALUES (STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'), ?, ?, ?)";
+        String sql = "INSERT INTO Consulta (dataHora, nomeVeterinario, nomePet, notas) VALUES (STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'), ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, consulta.getDataHora());
-            pstmt.setInt(2, consulta.getVeterinarioId());
-            pstmt.setInt(3, consulta.getPetId());
+            pstmt.setString(2, consulta.getNomeVeterinario());
+            pstmt.setString(3, consulta.getNomePet());
             pstmt.setString(4, consulta.getNotas());
             pstmt.executeUpdate();
         }  catch (SQLException e) {
@@ -33,7 +33,9 @@ public class ConsultaController {
                 while (rs.next()) {
                     Consulta consulta = new Consulta();
                     consulta.setId(rs.getInt("id"));
-                    consulta.setDataHora(rs.getString("DataHora"));
+                    consulta.setDataHora(rs.getString("dataHora"));
+                    consulta.setNomeVeterinario(rs.getString("nomeVeterinario"));
+                    consulta.setNomePet(rs.getString("nomePet"));
                     consulta.setNotas(rs.getString("notas"));
                     listConsultas.add(consulta);
                 }
@@ -44,11 +46,11 @@ public class ConsultaController {
     }
 
     public static void updateData(Connection conn, Consulta consulta) throws SQLException {
-        String sql = "UPDATE Consulta SET dataHora = ?, veterinario_id = ?, pet_id = ?, notas = ? WHERE id = ?";
+        String sql = "UPDATE Consulta SET dataHora = ?, nomeVeterinario = ?, nomePet = ?, notas = ? WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, consulta.getDataHora());
-            pstmt.setInt(2, consulta.getVeterinarioId());
-            pstmt.setInt(3, consulta.getPetId());
+            pstmt.setString(2, consulta.getNomeVeterinario());
+            pstmt.setString(3, consulta.getNomePet());
             pstmt.setString(4, consulta.getNotas());
             pstmt.setInt(5, consulta.getId());
             pstmt.executeUpdate();
