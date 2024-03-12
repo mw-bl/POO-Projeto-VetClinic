@@ -47,7 +47,7 @@ public class Main {
                 System.out.println("Digite a opção desejada:");
 
                 int opcao = scanner.nextInt();
-                scanner.nextLine(); // Consumir a quebra de linha após a leitura do número
+                scanner.nextLine();
 
                 switch (opcao) {
                     case 1:
