@@ -24,7 +24,7 @@
 ###  - Os clientes podem agendar consultas para seus animais de estimação.
 ###  - As consultas são associadas a veterinários específicos e pets.
 <div align = "center">
-<img src="https://github.com/mw-bl/POO-Projeto-VetClinic/assets/115299182/b76851bb-2bd4-4354-9594-14321c7ba8e7)">
+<img src="https://github.com/mw-bl/POO-Projeto-VetClinic/assets/115299182/b76851bb-2bd4-4354-9594-14321c7ba8e7">
 </div>
 
 ### 3. Gerenciamento de Pets:
