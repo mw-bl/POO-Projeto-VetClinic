@@ -40,7 +40,7 @@ public class TutorController {
                 listTutors.add(tutor);
             }
         }   catch (SQLException e) {
-            throw new SQLException("Erro ao selecionar os dados do pet", e);
+            throw new SQLException("Erro ao selecionar os dados do tutor", e);
         }
         return listTutors;
     }
