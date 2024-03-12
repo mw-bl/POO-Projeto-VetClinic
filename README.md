@@ -3,19 +3,19 @@
 <br>Programação Orientada a Objetos 
   
 <br>Projeto Final
-<br> PetCare Sistem 
+<br> PetCare System 
 </div>
 
 ### `📄Descrição do Projeto:`
-### Integração de Sistemas para Transferência e Troca de Informações em um Ambiente de Banco de Dados. O PetCare Sistem é uma aplicação para gerenciamento de uma clínica veterinária, especialmente focado na administração de consultas médicas para animais de estimação. Ele oferece funcionalidades essenciais para o dia a dia da clínica, permitindo que veterinários, clientes e pets sejam registrados no sistema.
+### Integração de aplicação para Transferência e Troca de Informações em um Ambiente de Banco de Dados. O PetCare System é uma aplicação para gerenciamento de uma clínica veterinária, especialmente focado na administração de consultas médicas para animais de estimação. Ele oferece funcionalidades essenciais para o dia a dia da clínica, permitindo que veterinários, clientes e pets sejam registrados no sistema.
 
 ### **Objetivo:**
-### O projeto tem como objetivo estabelecer uma comunicação entre o sistema criado e um banco de dados por meio de um CRUD, permitindo a transferência bidirecional de informações. A implementação visa facilitar a troca de dados e disponibilidade das informações.
+### O projeto tem como objetivo estabelecer uma comunicação entre o sistema criado e um banco de dados por meio de CRUD`S(Create, Read, Update e Delete), permitindo a transferência bidirecional de informações. A implementação visa facilitar a troca de dados e disponibilidade das informações.
 
 ### `⚙️Principais Funcionalidades:`
 
 ### 1. Cadastro de Entidades:
-###   - Veterinários, clientes e animais de estimação podem ser cadastrados no sistema.
+###   - Veterinários, clientes, consultas e animais de estimação podem ser cadastrados no sistema.
 <div align = "center">
 <img src="https://github.com/mw-bl/POO-Projeto-VetClinic/assets/115299182/9da4214a-c8ce-4520-aa1e-67a9fb34075c">
 </div>
