@@ -13,7 +13,7 @@ import models.Consulta;
 public class ConsultaController {
     // CRUD
     public static void insertData(Connection conn, Consulta consulta) throws SQLException {
-        String sql = "INSERT INTO Consulta (dataHora, nomeVeterinario, nomePet, notas) VALUES (STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'), ?, ?, ?)";
+        String sql = "INSERT INTO Consulta (dataHora, nomeVeterinario, nomePet, notas) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, consulta.getDataHora());
             pstmt.setString(2, consulta.getNomeVeterinario());
