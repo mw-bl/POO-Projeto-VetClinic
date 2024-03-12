@@ -173,9 +173,9 @@ public class Main {
                         Pet petAtualizado = new Pet();
                         petAtualizado.setId(petIdParaAtualizar);
                         petAtualizado.setNome(novoNomePet);
-                        petAtualizado.setNome(novaEspeciePet);
+                        petAtualizado.setEspecie(novaEspeciePet);
                         petAtualizado.setRaca(novaRacaPet);
-                        petAtualizado.setRaca(novaIdadePet);
+                        petAtualizado.setIdade(novaIdadePet);
 
                         PetController.updateData(conn, petIdParaAtualizar, petAtualizado);
                         System.out.println("Pet atualizado com sucesso.");
