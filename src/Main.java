@@ -168,7 +168,7 @@ public class Main {
                         System.out.println("Digite a nova raça do pet:");
                         String novaRacaPet = scanner.nextLine();
                         System.out.println("Digite a nova idade do pet:");
-                        String novaIdadePet = scanner.nextLine();
+                        int novaIdadePet = scanner.nextLine();
 
                         Pet petAtualizado = new Pet();
                         petAtualizado.setId(petIdParaAtualizar);
