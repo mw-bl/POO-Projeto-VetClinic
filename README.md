@@ -96,7 +96,7 @@
 ###  - Libraries->add external jar
 
 ### No VS CODE:
-###  - Vá em `Java Projects` e em `Reference Libraries` adicione o conector JDBC
+###  - Vá em `Java Projects` e em `Referenced Libraries` adicione o conector JDBC
 
 ### Abra o arquivo Conexao.java localizado na pasta src/db.
 ### Insira suas credenciais do MySQL (nome de usuário, senha, URL do banco de dados) nas variáveis USERNAME, PASSWORD e URL.
