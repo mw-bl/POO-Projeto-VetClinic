@@ -37,7 +37,7 @@
 ### 4. Consulta de Clientes:
 ###  - Visualização de todos os clientes registrados na clínica.
 <div align = "center">
-<img src="https://github.com/mw-bl/POO-Projeto-VetClinic/assets/115299182/3f89728d-1d70-4ebf-81da-d6abab5a6b93">
+<img src="https://github.com/mw-bl/POO-Projeto-VetClinic/assets/115299182/5888c6c6-9d9d-4618-961c-4427d1ae582c">
 </div>
 
 ### 5. Consulta de Veterinários:
